@@ -95,7 +95,7 @@ function Spliter() {
         </div>
         <div className="result">
           <TipsOutput
-            tipPerPerson={tipPerPerson}
+            tipPerPerson={tipPerPerson.toFixed(2)}
             totalTipAmountPaid={totalTip}
           />
         </div>

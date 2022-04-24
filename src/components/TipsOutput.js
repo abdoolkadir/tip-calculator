@@ -27,7 +27,7 @@ function TipsOutput({ totalTipAmountPaid, tipPerPerson }) {
         </div>
       </div>
       <button className="btn btn-reset" type="submit">
-        Reset
+        Submit
       </button>
     </div>
   );
