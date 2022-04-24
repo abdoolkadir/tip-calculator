@@ -56,13 +56,16 @@ body {
 }
 
 /* Form input */
+form {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+}
 .form-control {
   font-size: 24px;
   color: var(--Dark-grayish-cyan-2);
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
 }
 
 .form-control label {
@@ -72,6 +75,7 @@ body {
 }
 
 .form-control input {
+  width: 100%;
   padding: 5px 0;
   font-size: 24px;
   background: var(--Light-grayish-cyan-2);
@@ -96,8 +100,26 @@ body {
   background: var(--Light-grayish-cyan-2);
 }
 
+.custom-form-input {
+  max-width: 105px;
+  width: 100%;
+  text-align: center;
+  background: var(--Light-grayish-cyan-2);
+  border: 0;
+  border-radius: 5px;
+}
+
+.custom-form-input::placeholder {
+  font-weight: 700;
+}
+
 /* Tips Results */
+
 .tips {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   background: var(--Very-dark-cyan);
   padding: 0.5em 1em;
   border-radius: 15px;
@@ -140,6 +162,7 @@ body {
 
 /* Buttton */
 .btn {
+  cursor: pointer;
   color: var(--White);
   background: var(--Very-dark-cyan);
   padding: 0.5em 1em;
@@ -147,9 +170,41 @@ body {
   font-weight: 700;
   border-radius: 5px;
   border: 0;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  color: var(--Very-dark-cyan);
+  background: var(--Strong-cyan);
+}
+
+.btn-reset {
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  color: var(--Very-dark-cyan);
+  background: var(--Dark-grayish-cyan);
 }
 
 .btn-custom {
   background-color: var(--Light-grayish-cyan-2);
   color: var(--Very-dark-cyan);
+}
+
+@media only screen and (max-width: 600px) {
+  .App {
+    height: auto;
+  }
+
+  .splitter {
+    width: 90%;
+    /* padding: 1em; */
+    margin-bottom: 2em;
+    justify-content: center;
+  }
+
+  form {
+    flex-direction: column;
+    margin-bottom: 4em;
+  }
 }

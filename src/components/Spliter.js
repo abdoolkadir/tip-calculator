@@ -27,8 +27,8 @@ function Spliter() {
     }
   ];
 
-  const [bill, setBill] = useState();
-  const [tip, setTip] = useState();
+  const [bill, setBill] = useState(0);
+  const [tip, setTip] = useState(0);
   const [numberOfPeople, setNumberOfPeople] = useState(0);
   const [tipPerPerson, setTipPerPerson] = useState(0);
   const [totalTip, setTotalTip] = useState(0);
@@ -45,9 +45,9 @@ function Spliter() {
       setTipPerPerson(totalTip / numberOfPeople);
     }
 
-    console.log(tip);
-    console.log(totalTip);
-    console.log(tipPerPerson);
+    // console.log(tip);
+    // console.log(totalTip);
+    // console.log(tipPerPerson);
   };
 
   return (
