@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import FormInput from './FormInput';
 import TipsOutput from './TipsOutput';
 
 function Spliter() {
-  const tipPercentage = [
+  const percentages = [
     {
       id: 1,
       percentage: '5'
@@ -23,40 +24,82 @@ function Spliter() {
     {
       id: 5,
       percentage: '50'
-    },
-    {
-      id: 6,
-      percentage: 'Custom'
     }
   ];
+
+  const [bill, setBill] = useState();
+  const [tip, setTip] = useState();
+  const [numberOfPeople, setNumberOfPeople] = useState(0);
+  const [tipPerPerson, setTipPerPerson] = useState(0);
+  const [totalTip, setTotalTip] = useState(0);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (numberOfPeople <= 0) {
+      setError(true);
+    } else {
+      setError(false);
+      setTotalTip((tip / 100) * bill);
+      setTipPerPerson(totalTip / numberOfPeople);
+    }
+
+    console.log(tip);
+    console.log(totalTip);
+    console.log(tipPerPerson);
+  };
+
   return (
     <div className="splitter">
-      <form>
-        <FormInput label="Bill" />
-        <div className="tip-percentages">
-          <h4>Select Tip %</h4>
-          <div className="grid">
-            {tipPercentage.map((data) => (
-              <button
-                key={data.id}
-                className={data.id === 6 ? 'btn btn-custom' : 'btn'}
-              >
-                {data.percentage === 'Custom'
-                  ? data.percentage
-                  : data.percentage + '%'}
-              </button>
-            ))}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <FormInput
+            type={'number'}
+            label="Bill"
+            value={bill}
+            onChange={(e) => setBill(e.target.value)}
+          />
+          <div className="tip-percentages">
+            <h4>Select Tip %</h4>
+            <div className="grid">
+              {percentages.map((data) => (
+                <button
+                  type="button"
+                  key={data.id}
+                  className="btn"
+                  onClick={(e) => setTip(e.target.value)}
+                  value={data.percentage}
+                >
+                  {data.percentage + '%'}
+                </button>
+              ))}
+              <input
+                type="number"
+                placeholder="Custom"
+                className="custom-form-input"
+                onChange={(e) => setTip(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="number-of-people">
+            <h4>Number of People</h4>
+            {error && <span className="error">Can't be zero</span>}
+            <FormInput
+              type={'number'}
+              value={numberOfPeople}
+              onChange={(e) => setNumberOfPeople(e.target.value)}
+            />
           </div>
         </div>
-
-        <div className="number-of-people">
-          <h4>Number of People</h4>
-          <FormInput />
+        <div className="result">
+          <TipsOutput
+            tipPerPerson={tipPerPerson}
+            totalTipAmountPaid={totalTip}
+          />
         </div>
       </form>
-      <div className="result">
-        <TipsOutput />
-      </div>
     </div>
   );
 }
